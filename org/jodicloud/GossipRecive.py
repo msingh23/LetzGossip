@@ -1,6 +1,7 @@
 '''
 Created on Sep 23, 2013
 
+@copyright: jodicloud.org
 @author: Ankit Kumar Honey
 Gossip Protocol Implemented With ZeroMq 
 Bind ROUTER socket to tcp://*:<Port>
