@@ -1,6 +1,6 @@
 '''
 Created on Sep 23, 2013
-
+@copyright: jodicloud.org
 @author: Ankit Kumar Honey
 Gossip Protocol Implemented With ZeroMq 
 Connect REP socket to tcp://<IP-Address>:<Port>
