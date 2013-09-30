@@ -11,23 +11,28 @@ import sys
 import time
 import random	
 from multiprocessing import Process
-from grecv import *
+from GossipRecive import *
+from GossipConnection import *
 
-class gsend(Process):
+class Gossip(Process):
 	
 	# Create a Req Socket With The given IPAddress, Perform The Send 
 	# Operation And Close The Req Socket.
 	def run(self):
 		
-		
 	   	# Create a Context
 	   	context = zmq.Context()
-	   	
+
+		reqConnect  = GossipConnection()
+		port = reqConnect.getPort()
+				   	
 		while True:
 			# Create a Request Socket
 			req = context.socket(zmq.REQ)
 			ipAddress = getIPAddress()
-			reqConnection = getConnection(ipAddress)
+			
+			reqConnection = reqConnect.getConnection(True)
+			reqConnection = reqConnection + ipAddress + port	
 			req.connect(reqConnection)
 
 			cmd = 'GAMMA'
@@ -54,19 +59,11 @@ def getIPAddress():
 	ipAddress = random.choice(ipAddressList)
 	return ipAddress
 
-def getConnection(ipAddress):
-	
-	cmdStr = "tcp://"
-	cmdStr = cmdStr + ipAddress
-	cmdStr = cmdStr + ":5556"
-	return cmdStr
-
-
 def main():
 	
-	# Get the gsend & grecv objects
-	sendMsg = gsend()
-	recvMsg = grecv()
+	# Get the Gossip & GossipRecive objects
+	sendMsg = Gossip()
+	recvMsg = GossipRecive()
 
 	# Start sendMsg & recvMsg processes.
 	sendMsg.start()
