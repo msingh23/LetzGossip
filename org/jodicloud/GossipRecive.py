@@ -7,9 +7,9 @@ Bind ROUTER socket to tcp://*:<Port>
 '''
 
 import zmq
+#import ConfigParser
 from multiprocessing import Process
-
-PORT = ":5556"
+from GossipConnection import *
 
 class GossipRecive(Process):
 
@@ -17,15 +17,15 @@ class GossipRecive(Process):
 	# Create a Req Socket With The given IPAddress, Perform The Send 
 	# Operation And Close The Req Socket.
 	def run(self):
-
+		
 		# Create a Context
 		context = zmq.Context()
 	
 		# Create a Reply Socket
 		rep = context.socket(zmq.ROUTER)
 
-		recvConnection = "tcp://*"
-		recvConnection = recvConnection + PORT
+		recvConnect = GossipConnection()
+		recvConnection = recvConnect.getConnection(False)
 		rep.bind(recvConnection)
 		
 		try:
@@ -42,6 +42,3 @@ class GossipRecive(Process):
 			
 		finally:
 			rep.close()
-	
-			
-
