@@ -12,10 +12,10 @@ class GossipConnection():
         self.recvConnection = self.config.get('GOSSIP_RECIVE', 'tcp_bind')  
         self.port = self.config.get('DEFAULT','PORT')
         
-    def getConnection(self,send=False):
+    def getConnection(self,ipAddr=0):
         
-        if send == True:
-            self.connectionStr = self.reqConnection
+        if ipAddr != 0:
+            self.connectionStr = self.reqConnection + ipAddr + self.port
             
         else:
              self.connectionStr = self.recvConnection + self.port

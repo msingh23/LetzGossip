@@ -7,14 +7,12 @@ Connect REP socket to tcp://<IP-Address>:<Port>
 '''
 
 import zmq
-import sys
 import time
 import random	
 from multiprocessing import Process
-from GossipRecive import *
 from GossipConnection import *
 
-class Gossip(Process):
+class GossipSend(Process):
 	
 	# Create a Req Socket With The given IPAddress, Perform The Send 
 	# Operation And Close The Req Socket.
@@ -57,21 +55,3 @@ def getIPAddress():
 	ipAddressList = ["192.168.14.148", "192.168.14.127"]
 	ipAddress = random.choice(ipAddressList)
 	return ipAddress
-
-def main():
-	
-	# Get the Gossip & GossipRecive objects
-	sendMsg = Gossip()
-	recvMsg = GossipRecive()
-
-	# Start sendMsg & recvMsg processes.
-	sendMsg.start()
-	recvMsg.start()
-
-	sendMsg.join()
-	recvMsg.join()
-
-
-# Staring Of The Main Function
-if __name__ == '__main__':
-	sys.exit(main())
