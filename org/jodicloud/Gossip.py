@@ -31,8 +31,7 @@ class Gossip(Process):
 			req = context.socket(zmq.REQ)
 			ipAddress = getIPAddress()
 			
-			reqConnection = reqConnect.getConnection(True)
-			reqConnection = reqConnection + ipAddress + port	
+			reqConnection = reqConnect.getConnection(ipAddress)	
 			req.connect(reqConnection)
 
 			cmd = 'GAMMA'
