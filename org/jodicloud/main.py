@@ -13,6 +13,7 @@ from GossipRecive import *
 def main():
 	
 	# Get the GossipSend & GossipRecive objects
+	print "Gossip Application Starting ..."
 	sendMsg = GossipSend()
 	recvMsg = GossipRecive()
 

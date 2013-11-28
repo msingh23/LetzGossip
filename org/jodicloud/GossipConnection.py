@@ -1,3 +1,12 @@
+'''
+Created on Sep 23, 2013
+
+@author: Manu Singh
+Gossip Protocol Implemented With ZeroMq 
+'''
+
+
+import random
 import ConfigParser
 
 class GossipConnection():
@@ -9,7 +18,8 @@ class GossipConnection():
         self.config = ConfigParser.ConfigParser()
         self.config.read('gossip.conf')
         self.reqConnection = self.config.get('GOSSIP_SEND', 'tcp_connect')   
-        self.recvConnection = self.config.get('GOSSIP_RECIVE', 'tcp_bind')  
+        self.recvConnection = self.config.get('GOSSIP_RECIVE', 'tcp_bind') 
+	self.ipList = self.config.get('IPLIST','IP').split(',')
         self.port = self.config.get('DEFAULT','PORT')
         
     def getConnection(self,ipAddr=0):
@@ -24,6 +34,12 @@ class GossipConnection():
     
     def getPort(self):
         return (self.port)
+
+    # This function randomaly selects the ipaddress from the list.	
+    def getIPAddress(self):
+        ipAddress = random.choice(self.ipList)
+        return ipAddress
+
 
         
     

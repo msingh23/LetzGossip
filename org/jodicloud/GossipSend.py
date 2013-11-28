@@ -1,14 +1,13 @@
 '''
 Created on Sep 23, 2013
 
-@author: Ankit Kumar Honey
+@author: Manu Singh
 Gossip Protocol Implemented With ZeroMq 
 Connect REP socket to tcp://<IP-Address>:<Port>
 '''
 
 import zmq
 import time
-import random	
 from multiprocessing import Process
 from GossipConnection import *
 
@@ -27,12 +26,12 @@ class GossipSend(Process):
 		while True:
 			# Create a Request Socket
 			req = context.socket(zmq.REQ)
-			ipAddress = getIPAddress()
+			ipAddress = reqConnect.getIPAddress()
 			
 			reqConnection = reqConnect.getConnection(ipAddress)	
 			req.connect(reqConnection)
 
-			cmd = 'GAMMA'
+			cmd = 'BETA'
 
 			try:
 				# Send a Request To Execute a Command.
@@ -49,9 +48,3 @@ class GossipSend(Process):
 	  		finally:
 	  			req.close()
 
-
-# This function randomaly selects the ipaddress from the list.
-def getIPAddress():
-	ipAddressList = ["192.168.14.148", "192.168.14.127"]
-	ipAddress = random.choice(ipAddressList)
-	return ipAddress
